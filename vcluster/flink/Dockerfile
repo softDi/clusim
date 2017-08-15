@@ -25,6 +25,9 @@ RUN echo export TERM=xterm >> ~/.bashrc
 RUN echo export LD_LIBRARY_PATH=/opt/mpich/lib:$LD_LIBRARY_PATH >> ~/.bashrc
 RUN echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 RUN cp /root/benchmark/mpi/tools/demo.sh /root
+RUN cd /root && wget https://archive.apache.org/dist/flink/flink-1.2.1/flink-1.2.1-bin-hadoop27-scala_2.11.tgz
+RUN tar zxvf flink-1.2.1-bin-hadoop27-scala_2.11.tgz && mv flink-1.2.1-bin-hadoop27-scala_2.11 flink
+RUN cd /root/flink/ 
 
 #RUN 
 CMD ["/usr/sbin/sshd", "-D"]
