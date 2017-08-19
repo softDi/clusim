@@ -26,8 +26,12 @@ RUN echo export LD_LIBRARY_PATH=/opt/mpich/lib:$LD_LIBRARY_PATH >> ~/.bashrc
 RUN echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 RUN cp /root/benchmark/mpi/tools/demo.sh /root
 RUN cd /root && wget https://archive.apache.org/dist/flink/flink-1.2.1/flink-1.2.1-bin-hadoop27-scala_2.11.tgz
-RUN tar zxvf flink-1.2.1-bin-hadoop27-scala_2.11.tgz && mv flink-1.2.1-bin-hadoop27-scala_2.11 flink
-RUN cd /root/flink/ 
+RUN cd /root && tar zxvf flink-1.2.1-bin-hadoop27-scala_2.11.tgz && mv flink-1.2.1 flink
+RUN cd /root/flink/conf && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/masterip.txt
+RUN cd /root/flink/conf && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/slaveip.txt
+RUN cat /root/flink/conf/masterip.txt > masters
+RUN cat /root/flink/conf/slaveip.txt > slaves
+ 
 
 #RUN 
 CMD ["/usr/sbin/sshd", "-D"]
