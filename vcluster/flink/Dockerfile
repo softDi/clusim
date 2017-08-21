@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER Cheng-Yueh Liu <cyliustack@gmail.com>
+MAINTAINER Cheng-Yueh Liu <cyliustack@gmail.com> 
 RUN apt-get update && apt-get install -y openssh-server sshpass gcc g++ make  iputils-ping git vim wget gfortran iperf
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
@@ -27,11 +27,16 @@ RUN echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 RUN cp /root/benchmark/mpi/tools/demo.sh /root
 RUN cd /root && wget https://archive.apache.org/dist/flink/flink-1.2.1/flink-1.2.1-bin-hadoop27-scala_2.11.tgz
 RUN cd /root && tar zxvf flink-1.2.1-bin-hadoop27-scala_2.11.tgz && mv flink-1.2.1 flink
-RUN cd /root/flink/conf && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/masterip.txt
-RUN cd /root/flink/conf && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/slaveip.txt
-RUN cat /root/flink/conf/masterip.txt > masters
-RUN cat /root/flink/conf/slaveip.txt > slaves
- 
+RUN cd /root/flink/conf && rm masters && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/masters
+RUN cd /root/flink/conf && rm slaves && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/slaves
+
+#install java8
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:webupd8team/java -y && apt-get update  
+RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && apt-get install -y oracle-java8-installer 
+RUN apt-get -y install oracle-java8-set-default
+RUN echo "JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> /etc/environment && echo "JRE_HOME=/usr/lib/jvm/java-8-oracle/jre" >> /etc/environment 
+RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc && echo "export JRE_HOME=/usr/lib/jvm/java-8-oracle/jre" >> ~/.bashrc 
 
 #RUN 
 CMD ["/usr/sbin/sshd", "-D"]
