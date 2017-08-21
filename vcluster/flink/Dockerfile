@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER Cheng-Yueh Liu <cyliustack@gmail.com> 
+MAINTAINER Cheng-Yueh Liu && Yuan-Di Li <cyliustack@gmail.com && lisoftdi@gmail.com> 
 RUN apt-get update && apt-get install -y openssh-server sshpass gcc g++ make  iputils-ping git vim wget gfortran iperf
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
