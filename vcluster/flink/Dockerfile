@@ -33,7 +33,7 @@ RUN cd /root/flink/conf && rm masters && wget https://raw.githubusercontent.com/
 RUN cd /root/flink/conf && rm slaves && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/slaves
 RUN cd /root/flink/conf && sed -i='' {s/localhost/172\.17\.0\.2/g} flink-conf.yaml 
 RUN cd /root/flink/ && mkdir benchmark && wget -O hamlet.txt http://www.gutenberg.org/cache/epub/1787/pg1787.txt
-RUN cd /root/flink/benchmark && git clone https://github.com/aritter/twitter_nlp && git clone https://github.com/citlab/flink-realtime-streaming/ && git clone https://github.com/tillrohrmann/cep-monitoring && git clone https://github.com/neoluc/Spark-Streaming-PageRank
+RUN cd /root/flink/benchmark && git clone https://github.com/aritter/twitter_nlp  && git clone https://github.com/tillrohrmann/cep-monitoring && git clone https://github.com/FlinkML/flink-tensorflow.git && git clone https://github.com/brakmic/TwitterClient.git && git clone https://github.com/brakmic/TwitterFlink.git   
 
 
 #install java8
@@ -47,6 +47,22 @@ RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc && echo "exp
 RUN cd /usr/local/ && wget http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 RUN cd /usr/local/ && tar xzf apache-maven-3.3.9-bin.tar.gz && ln -s apache-maven-3.3.9 apache-maven
 RUN cd /etc/profile.d/ && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/apache-maven.sh
+
+#install anaconda
+RUN cd /root && wget http://repo.continuum.io/archive/Anaconda2-4.3.0-Linux-x86_64.sh
+RUN apt-get update && apt-get install bzip2 && apt-get install curl
+
+#install scala && sbt
+ENV SCALA_VERSION 2.12.3
+ENV SBT_VERSION 0.13.16
+# Scala expects this file
+RUN touch /usr/lib/jvm/java-8-oracle/release
+# Install Scala
+## Piping curl directly in tar
+RUN curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && echo >> /root/.bashrc && echo 'export PATH=~/scala-$SCALA_VERSION/bin:$PATH' >> /root/.bashrc
+# Install sbt
+RUN curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && dpkg -i sbt-$SBT_VERSION.deb && rm sbt-$SBT_VERSION.deb && apt-get update && apt-get install sbt && sbt sbtVersion
+
 
 #RUN 
 CMD ["/usr/sbin/sshd", "-D"]
