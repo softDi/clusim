@@ -38,6 +38,10 @@ RUN cd /root/flink/benchmark/TwitterClient/ && apt-get install -y python-pyodbc
 #https://github.com/jiangwen365/pypyodbc && https://github.com/tweepy/tweepy && https://github.com/avian2/unidecode 
 RUN echo "pip install tweepy" >> /root/flink/benchmark/TwitterClient/EnvSetup.sh && echo "pip install unidecode" >> /root/flink/benchmark/TwitterClient/EnvSetup.sh && echo "pip install pypyodbc" >> /root/flink/benchmark/TwitterClient/EnvSetup.sh
 
+#flink-tensorflow 
+#https://github.com/FlinkML/flink-tensorflow
+RUN cd /root/flink/benchmark/flink-tensorflow/ && wget http://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip
+
 #install java8
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:webupd8team/java -y && apt-get update  
