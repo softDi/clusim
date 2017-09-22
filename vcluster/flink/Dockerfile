@@ -75,8 +75,8 @@ RUN pip3 install tensorflow && pip install tensorflow
 RUN cd /root/ && git clone https://github.com/tensorflow/benchmarks.git tensorflowbenchmarks
 
 #install hdfs
-RUN wget http://www.us.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz && tar -zxf ./hadoop-2.7.1.tar.gz -C /usr/local
-RUN cd /usr/local/ && mv ./hadoop-2.7.1/ ./hadoop 
+RUN wget http://www.us.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz && tar -zxf ./hadoop-2.7.4.tar.gz -C /usr/local
+RUN cd /usr/local/ && mv ./hadoop-2.7.4/ ./hadoop 
 RUN cd /usr/local/hadoop/etc/hadoop/ && rm -f slaves core-site.xml hdfs-site.xml mapred-site.xml.template yarn-site.xml
 RUN cd /usr/local/hadoop/etc/hadoop/ && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/hdfs/slaves && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/hdfs/core-site.xml && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/hdfs/hdfs-site.xml && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/hdfs/mapred-site.xml && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/hdfs/yarn-site.xml
 
