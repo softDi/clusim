@@ -60,6 +60,7 @@ RUN cd /root && tar zxvf flink-1.2.1-bin-hadoop27-scala_2.11.tgz && mv flink-1.2
 RUN cd /root/flink/conf && rm masters && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/masters
 RUN cd /root/flink/conf && rm slaves && wget https://raw.githubusercontent.com/softDi/clusim/yuandi/vcluster/flink/slaves
 RUN cd /root/flink/conf && sed -i='' {s/localhost/172\.17\.0\.2/g} flink-conf.yaml
+RUN cd /root/flink/conf && echo "fs.hdfs.hadoopconf: /usr/local/hadoop/" >> flink-conf.yaml 
 RUN cd /root/flink/ && mkdir benchmark && wget -O hamlet.txt http://www.gutenberg.org/cache/epub/1787/pg1787.txt
 RUN cd /root/flink/benchmark && git clone https://github.com/aritter/twitter_nlp  && git clone https://github.com/tillrohrmann/cep-monitoring && git clone https://github.com/FlinkML/flink-tensorflow.git && git clone https://github.com/brakmic/TwitterClient.git && git clone https://github.com/brakmic/TwitterFlink.git
 RUN cd /root/flink/benchmark/TwitterClient/ && apt-get install -y python-pyodbc
