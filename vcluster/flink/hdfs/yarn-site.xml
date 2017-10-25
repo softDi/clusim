@@ -17,7 +17,7 @@
 <!-- Site specific YARN configuration properties -->
 <property>
 <name>yarn.resourcemanager.hostname</name>
-<value>172.17.0.2</value>
+<value>172.17.0.8</value>
 </property>
 <property>
 <name>yarn.nodemanager.aux-services</name>
