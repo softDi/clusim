@@ -28,7 +28,7 @@
 <property>
 <name>dfs.datanode.data.dir</name>
 <!--value>file:/usr/local/hadoop/tmp/dfs/data</value-->
-<value>file:/usr/local/hadoop/tmp</value>
+<value>file:/usr/local/hadoop/tmp/hdfs_tmp</value>
 </property>
 <property>
 <name>dfs.replication</name>
