@@ -70,6 +70,8 @@ RUN pip install tweepy && pip install unidecode && pip install pypyodbc && pip i
 #flink-tensorflow
 #https://github.com/FlinkML/flink-tensorflow
 RUN cd /root/flink/benchmark/flink-tensorflow/ && wget http://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip
+RUN cd /root/flink/benchmark/flink-tensorflow/ && mkdir inception && mv inception5h.zip inception/ && cd inception/ && unzip inception5h.zip 
+RUN cd /root/flink/benchmark/flink-tensorflow/ && wget https://github.com/softDi/clusim/raw/yuandi/vcluster/flink/flinkML/images.zip && unzip images.zip 
 
 #install tensorflow
 RUN pip3 install tensorflow && pip install tensorflow
