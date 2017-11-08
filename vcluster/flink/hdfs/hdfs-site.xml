@@ -22,6 +22,11 @@
 <value>172.17.0.8:50090</value>
 </property>
 <property>
+	  <name>dfs.namenode.fs-limits.max-directory-items</name>
+	    <value>6400000</value>
+		  <description>Defines the maximum number of items that a directory may contain. Cannot set the property to a value less than 1 or more than 6400000.</description>
+</property>
+<property>
 <name>dfs.namenode.name.dir</name>
 <value>file:/usr/local/hadoop/tmp/dfs/name</value>
 </property>
