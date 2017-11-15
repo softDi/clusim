@@ -26,6 +26,7 @@ RUN echo export TERM=xterm >> ~/.bashrc
 RUN echo export LD_LIBRARY_PATH=/opt/mpich/lib:$LD_LIBRARY_PATH >> ~/.bashrc
 RUN echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 RUN cp /root/benchmark/mpi/tools/demo.sh /root
+RUN echo export LC_ALL=C >> ~/.bashrc 
 
 #install java8
 RUN apt-get install -y software-properties-common
